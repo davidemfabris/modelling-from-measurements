@@ -8,10 +8,10 @@ end
 kk = 1;
 
 %% Data Plotting
-for j=1:1:o/10
-    A=BZ_tensor(:,:,j);
-    pcolor(A), shading interp, pause(0.001)
-end
+% for j=1:1:o/10
+%     A=BZ_tensor(:,:,j);
+%     pcolor(A), shading interp, pause(0.001)
+% end
 
 %% Data
 BZ = permute(BZ_tensor, [3,1,2]);
@@ -45,7 +45,7 @@ xlabel('Mode Number [#]')
 ylabel('Normalized Value [-]')
 
 % Reduced order
-r=20;
+r=7;
 Ur=U(:,1:r);
 Sigmar=Sigma(1:r,1:r);
 Vr=V(:,1:r);
