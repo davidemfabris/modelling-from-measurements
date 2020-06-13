@@ -4,10 +4,10 @@ clearvars -except BZ_tensor; close all; clc;
 
 [m,n,k] = size(BZ_tensor);
 
-% for j=1:1
-%     A=BZ_tensor(:,:,j);
-%     pcolor(A), shading interp, pause(0.05)
-% end
+for j=1:1
+    A=BZ_tensor(:,:,j);
+    pcolor(A), shading interp, pause(0.05)
+end
 
 %% Data
 input_tensor = permute(BZ_tensor(:,:,1:end-1),[3, 1, 2]);
