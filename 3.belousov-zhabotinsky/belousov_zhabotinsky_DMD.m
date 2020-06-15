@@ -12,10 +12,18 @@ end
 kk = 1;
 
 %% Data Plotting
-for j=1:1:o/10
-    A=BZ_tensor(:,:,j);
-    pcolor(A), shading interp, pause(0.001)
-end
+% for j=1:1:o/10
+%     A=BZ_tensor(:,:,j);
+%     pcolor(A), shading interp, pause(0.001)
+%     title('Chemical Oscillator Frame')
+%     xlabel('x [pixel]')
+%     ylabel('y [pixel]')
+%     figure
+%     [x, y] = meshgrid(1:451, 1:351);
+%     surf(x, y, A, 'FaceAlpha', 0.5, 'EdgeColor', 'none')
+%     title('Chemical Oscillator Frame')
+%     xlabel('x [pixel]'), ylabel('y [pixel]'), zlabel('Intensity [-]')
+% end
 
 %% Data
 BZ = permute(BZ_tensor, [3,1,2]);
