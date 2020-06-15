@@ -62,8 +62,9 @@ cutoff = cutoff & tt<=0.6;
 %contour(x/(2*pi),tt(cutoff),uu(:,cutoff).',[-10 -5 0 5 10]),shading interp, colormap(gray)
 % contour(x,tt,uu.'),shading interp, colormap(gray)
 
-%surfl(x,tt(cutoff),uu(:,cutoff).'),shading interp, colormap(gray), view(15,50)
-pcolor(x,tt(cutoff),uu(:,cutoff).'),shading interp, colormap(hot), %view(15,50)
+surfl(x,tt(cutoff),uu(:,cutoff).'),shading interp, colormap(hot)%, view(15,50)
+title('Flame Front Evolution'), xlabel('width [m]'), ylabel('time [s]'), zlabel('flame front')
+% pcolor(x,tt(cutoff),uu(:,cutoff).'),shading interp, colormap(hot), %view(15,50)
 tsave = tt(cutoff);
 xsave = x/(2*pi);
 dt = h;
@@ -87,6 +88,7 @@ figure(4)
 surfl(ks,tt(cutoff),(uut(:,cutoff).')),shading interp, colormap(hot), %view(15,50)
 xlabel('uut'), ylabel('t'), zlabel('u')
 figure(5)
-waterfall(ks,tt(cutoff),(uut(:,cutoff).')), colormap([0 0 0])
+waterfall(ks,tt(cutoff),(uut(:,cutoff).')), colormap(hot)
+title('Flame Front Evolution')
 xlabel('uut'), ylabel('t'), zlabel('u')
 set(gca,'Xlim',[-50 50])
