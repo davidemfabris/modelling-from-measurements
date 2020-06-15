@@ -1,17 +1,21 @@
 clearvars -except BZ_tensor U V Sigma b; close all; clc;
 
 if exist('BZ_tensor', 'var')==0
-    load ('C:\Users\davidemaria.fabris\OneDrive - Politecnico di Milano\PhD\PhD Courses\Modelling from Measurements\BZ.mat');
+    try
+        load ('C:\Users\davidemaria.fabris\OneDrive - Politecnico di Milano\PhD\PhD Courses\Modelling from Measurements\BZ.mat');
+    catch
+        load ('C:\Users\david\OneDrive - Politecnico di Milano\PhD\PhD Courses\Modelling from Measurements\BZ.mat');
+    end
 end
 
 [m,n,o] = size(BZ_tensor);
 kk = 1;
 
 %% Data Plotting
-% for j=1:1:o/10
-%     A=BZ_tensor(:,:,j);
-%     pcolor(A), shading interp, pause(0.001)
-% end
+for j=1:1:o/10
+    A=BZ_tensor(:,:,j);
+    pcolor(A), shading interp, pause(0.001)
+end
 
 %% Data
 BZ = permute(BZ_tensor, [3,1,2]);

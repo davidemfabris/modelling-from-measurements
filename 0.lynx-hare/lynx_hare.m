@@ -396,7 +396,6 @@ Xdot=Xdot(:,3:end-3);
 
 % Fitting with pinv
 Coeff=[];
-% Coeff = Xdot*pinv([X(:,3:end-3);X(1,3:end-3).*X(2,3:end-3)]);
 Coeff1 = Xdot(1,:)*pinv([X(1,3:end-3);X(1,3:end-3).*X(2,3:end-3)]);
 Coeff2 = Xdot(2,:)*pinv([X(2,3:end-3);X(1,3:end-3).*X(2,3:end-3)]);
 Coeff(1, 1:2:3) = Coeff1;

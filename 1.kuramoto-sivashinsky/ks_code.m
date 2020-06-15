@@ -56,37 +56,37 @@ end
 
 %%
 cutoff = tt >= 0;
-cutoff = cutoff & tt<=10;
+cutoff = cutoff & tt<=0.6;
 % cutoff = tt > 0; cutoff = cutoff & tt<1;
 
 %contour(x/(2*pi),tt(cutoff),uu(:,cutoff).',[-10 -5 0 5 10]),shading interp, colormap(gray)
 % contour(x,tt,uu.'),shading interp, colormap(gray)
 
 %surfl(x,tt(cutoff),uu(:,cutoff).'),shading interp, colormap(gray), view(15,50)
-% pcolor(x,tt(cutoff),uu(:,cutoff).'),shading interp, colormap(hot), %view(15,50)
+pcolor(x,tt(cutoff),uu(:,cutoff).'),shading interp, colormap(hot), %view(15,50)
 tsave = tt(cutoff);
 xsave = x/(2*pi);
 dt = h;
 dx = 1/N;
 usave = uu(:,cutoff).';
 
-data.time = tsave;
-data.space = xsave;
-data.input = usave(1:end-1,:);
-data.output = usave(1:end-1,:);
-save('data', 'data')
+% data.time = tsave;
+% data.space = xsave;
+% data.input = usave(1:end-1,:);
+% data.output = usave(1:end-1,:);
+% save('data', 'data')
 
 % %%
-% uu2=uu(:,cutoff); [mm,nn]=size(uu2);
-% for j=1:nn
-%     uut(:,j)=abs(fftshift(fft(uu2(:,j))));
-% end
-% k=[0:N/2-1 -N/2:-1].';
-% ks=fftshift(k);
-% figure(4)
-% surfl(ks,tt(cutoff),(uut(:,cutoff).')),shading interp, colormap(hot), %view(15,50)
-% xlabel('uut'), ylabel('t'), zlabel('u')
-% figure(5)
-% waterfall(ks,tt(cutoff),(uut(:,cutoff).')), colormap([0 0 0])
-% xlabel('uut'), ylabel('t'), zlabel('u')
-% set(gca,'Xlim',[-50 50])
+uu2=uu(:,cutoff); [mm,nn]=size(uu2);
+for j=1:nn
+    uut(:,j)=abs(fftshift(fft(uu2(:,j))));
+end
+k=[0:N/2-1 -N/2:-1].';
+ks=fftshift(k);
+figure(4)
+surfl(ks,tt(cutoff),(uut(:,cutoff).')),shading interp, colormap(hot), %view(15,50)
+xlabel('uut'), ylabel('t'), zlabel('u')
+figure(5)
+waterfall(ks,tt(cutoff),(uut(:,cutoff).')), colormap([0 0 0])
+xlabel('uut'), ylabel('t'), zlabel('u')
+set(gca,'Xlim',[-50 50])
