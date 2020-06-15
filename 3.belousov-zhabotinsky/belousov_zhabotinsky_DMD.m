@@ -12,18 +12,18 @@ end
 kk = 1;
 
 %% Data Plotting
-% for j=1:1:o/10
-%     A=BZ_tensor(:,:,j);
-%     pcolor(A), shading interp, pause(0.001)
-%     title('Chemical Oscillator Frame')
-%     xlabel('x [pixel]')
-%     ylabel('y [pixel]')
-%     figure
-%     [x, y] = meshgrid(1:n, 1:m);
-%     surf(x, y, A, 'FaceAlpha', 0.5, 'EdgeColor', 'none')
-%     title('Chemical Oscillator Frame')
-%     xlabel('x [pixel]'), ylabel('y [pixel]'), zlabel('Intensity [-]')
-% end
+for j=1:1:1
+    A=BZ_tensor(:,:,j);
+    pcolor(A), shading interp, pause(0.001)
+    title('Chemical Oscillator Frame')
+    xlabel('x [pixel]')
+    ylabel('y [pixel]')
+    figure
+    [x, y] = meshgrid(1:n, 1:m);
+    surf(x, y, A, 'FaceAlpha', 1.0, 'EdgeColor', 'none')
+    title('Chemical Oscillator 3D Frame')
+    xlabel('x [pixel]'), ylabel('y [pixel]'), zlabel('Intensity [-]')
+end
 
 %% Data
 BZ = permute(BZ_tensor, [3,1,2]);
@@ -83,7 +83,7 @@ end
 %     A=reshape(image, m, n);
 %     figure
 %     [x, y] = meshgrid(1:n, 1:m);
-%     surf(x, y, A, 'FaceAlpha', 0.5, 'EdgeColor', 'none')
+%     surf(x, y, A, 'FaceAlpha', 1.0, 'EdgeColor', 'none')
 %     title('Chemical Oscillator Modes')
 %     xlabel('x [pixel]'), ylabel('y [pixel]'), zlabel('Intensity [-]')
 % end
@@ -111,7 +111,7 @@ for j=1:5:o
     image = x_rec(:,j);
     A=reshape(image, m, n);
     [x, y] = meshgrid(1:n, 1:m);
-    surf(x, y, A, 'FaceAlpha', 0.5, 'EdgeColor', 'none'), pause(.001)
+    surf(x, y, A, 'FaceAlpha', 1.0, 'EdgeColor', 'none'), pause(.001)
     title('Chemical Oscillator 3D')
     xlabel('x [pixel]'), ylabel('y [pixel]'), zlabel('Intensity [-]')
 end
