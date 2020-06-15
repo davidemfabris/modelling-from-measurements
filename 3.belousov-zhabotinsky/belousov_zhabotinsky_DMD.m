@@ -78,6 +78,14 @@ if exist('b', 'var')==0 || size(b,1)~=r
     b = Phi\x_0;
 end
 
+for j=1:r
+    image = Phi(:,j);
+    A=reshape(image, m, n);
+    pcolor(A), shading interp, pause(0.001)
+    title('Chemical Oscillator Modes')
+    xlabel('x [pixel]')
+    ylabel('y [pixel]')
+end
 % Reconstruction
 x_dmd = gpuArray(zeros(r,0));
 for instant = 1:o
