@@ -90,4 +90,7 @@ for j=1:1:o/10
     image = x_rec(:,j);
     A=reshape(image, m, n);
     pcolor(A), shading interp, pause(0.001)
+    title('Chemical Oscillator Frame')
+    xlabel('x [pixel]')
+    ylabel('y [pixel]')
 end
