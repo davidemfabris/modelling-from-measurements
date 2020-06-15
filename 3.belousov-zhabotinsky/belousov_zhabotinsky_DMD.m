@@ -78,15 +78,15 @@ if exist('b', 'var')==0 || size(b,1)~=r
     b = Phi\x_0;
 end
 
-for j=1:r
-    image = real(Phi(:,j));
-    A=reshape(image, m, n);
-    figure
-    [x, y] = meshgrid(1:n, 1:m);
-    surf(x, y, A, 'FaceAlpha', 0.5, 'EdgeColor', 'none')
-    title('Chemical Oscillator Modes')
-    xlabel('x [pixel]'), ylabel('y [pixel]'), zlabel('Intensity [-]')
-end
+% for j=1:r
+%     image = real(Phi(:,j));
+%     A=reshape(image, m, n);
+%     figure
+%     [x, y] = meshgrid(1:n, 1:m);
+%     surf(x, y, A, 'FaceAlpha', 0.5, 'EdgeColor', 'none')
+%     title('Chemical Oscillator Modes')
+%     xlabel('x [pixel]'), ylabel('y [pixel]'), zlabel('Intensity [-]')
+% end
 
 % Reconstruction
 x_dmd = gpuArray(zeros(r,0));
