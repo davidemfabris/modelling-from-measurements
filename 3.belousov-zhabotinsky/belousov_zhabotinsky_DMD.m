@@ -19,7 +19,7 @@ kk = 1;
 %     xlabel('x [pixel]')
 %     ylabel('y [pixel]')
 %     figure
-%     [x, y] = meshgrid(1:451, 1:351);
+%     [x, y] = meshgrid(1:n, 1:m);
 %     surf(x, y, A, 'FaceAlpha', 0.5, 'EdgeColor', 'none')
 %     title('Chemical Oscillator Frame')
 %     xlabel('x [pixel]'), ylabel('y [pixel]'), zlabel('Intensity [-]')
@@ -57,7 +57,7 @@ xlabel('Mode Number [#]')
 ylabel('Normalized Value [-]')
 
 % Reduced order
-r=7;
+r=20;
 Ur=U(:,1:r);
 Sigmar=Sigma(1:r,1:r);
 Vr=V(:,1:r);
@@ -79,13 +79,15 @@ if exist('b', 'var')==0 || size(b,1)~=r
 end
 
 for j=1:r
-    image = Phi(:,j);
+    image = real(Phi(:,j));
     A=reshape(image, m, n);
-    pcolor(A), shading interp, pause(0.001)
+    figure
+    [x, y] = meshgrid(1:n, 1:m);
+    surf(x, y, A, 'FaceAlpha', 0.5, 'EdgeColor', 'none')
     title('Chemical Oscillator Modes')
-    xlabel('x [pixel]')
-    ylabel('y [pixel]')
+    xlabel('x [pixel]'), ylabel('y [pixel]'), zlabel('Intensity [-]')
 end
+
 % Reconstruction
 x_dmd = gpuArray(zeros(r,0));
 for instant = 1:o
@@ -94,11 +96,22 @@ end
 x_rec = real(Phi*x_dmd);
 
 %%
-for j=1:1:o/10
+figure
+for j=1:5:o
     image = x_rec(:,j);
     A=reshape(image, m, n);
     pcolor(A), shading interp, pause(0.001)
     title('Chemical Oscillator Frame')
     xlabel('x [pixel]')
     ylabel('y [pixel]')
+end
+
+figure
+for j=1:5:o
+    image = x_rec(:,j);
+    A=reshape(image, m, n);
+    [x, y] = meshgrid(1:n, 1:m);
+    surf(x, y, A, 'FaceAlpha', 0.5, 'EdgeColor', 'none'), pause(.001)
+    title('Chemical Oscillator 3D')
+    xlabel('x [pixel]'), ylabel('y [pixel]'), zlabel('Intensity [-]')
 end
