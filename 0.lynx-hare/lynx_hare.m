@@ -2,7 +2,7 @@ clear; close all; clc;
 warning off;
 
 %% Data
-augment = 1;
+augment = 0;
 Years = (1845:2:1903)';
 Time = Years-Years(1);
 dt = 2;
@@ -308,11 +308,11 @@ else
     rH = 11;%size(SigmaH, 1);
 end
 
-figure
-subplot 211, plot(UH(:,1:rH),'Linewidth',2), title('POD Modes - Elements of U'), grid on
-xlabel('time [y]'), ylabel('population [#]'), legend('1', '2', '3')
-subplot 212, plot(Time(1:mc-1),VH(:,1:rH),'Linewidth',2), title('POD Modes - Elements of V'), grid on
-xlabel('time [y]'), ylabel('population [#]'), legend('1', '2', '3')
+% figure
+% subplot 211, plot(UH(:,1:rH),'Linewidth',2), title('POD Modes - Elements of U'), grid on
+% xlabel('time [y]'), ylabel('population [#]'), legend('1', '2', '3')
+% subplot 212, plot(Time(1:mc-1),VH(:,1:rH),'Linewidth',2), title('POD Modes - Elements of V'), grid on
+% xlabel('time [y]'), ylabel('population [#]'), legend('1', '2', '3')
 
 UHr = UH(:,1:rH);
 VHr = VH(:,1:rH);
@@ -355,26 +355,26 @@ title('Time Series Data')
 legend('Data Prey')
 xlabel('Time [y]')
 ylabel('Population [#]')
-axis([Years(1)-dt, max(Years)+dt, 0, 1.1*max(max(X))])
 grid on
+axis([Years(1)-dt, max(Years)+dt, 0, 1.1*max(max(X))])
 subplot 212
+bar(Years, xH_rec(1, :).', 'FaceColor', [0    0.4470    0.7410])
+title('Time-Delay Embedding Reconstruction')
+legend('Reconstructed Prey')
+axis([Years(1)-dt, max(Years)+dt, 0, 1.1*max(max(X))])
+xlabel('Time [y]')
+ylabel('Population [#]')
+grid on
+
+% Plotting
+figure
+subplot 211
 bar(Years, X(2,:), 'FaceColor', [ 0.8500    0.3250    0.098])
 xlabel('Time [y]')
 ylabel('Population [#]')
 legend('Data Predator')
 axis([Years(1)-dt, max(Years)+dt, 0, 1.1*max(max(X))])
 grid on
-
-% Plotting
-figure
-subplot 211
-bar(Years, xH_rec(1, :).', 'FaceColor', [0    0.4470    0.7410])
-grid on
-title('Time-Delay Embedding Reconstruction')
-legend('Reconstructed Prey')
-axis([Years(1)-dt, max(Years)+dt, 0, 1.1*max(max(X))])
-xlabel('Time [y]')
-ylabel('Population [#]')
 subplot 212
 bar(Years, xH_rec(2, :).', 'FaceColor', [0.8500    0.3250    0.098])
 grid on
