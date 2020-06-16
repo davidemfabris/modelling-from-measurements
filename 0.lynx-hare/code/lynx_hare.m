@@ -54,8 +54,8 @@ Vr=V(:,1:r);
 A = X2*Vr/Sigmar*Ur';
 X2_pred = A*X1;
 
-figure
-subplot 211
+figure(70)
+subplot 221
 plot(Years(2:end), X2(1,:), 'Color', [0    0.4470    0.7410], 'LineWidth', 2)
 hold on
 plot(Years(2:end), X2_pred(1,:), '--', 'Color', [0    0.4470    0.7410], 'LineWidth', 2)
@@ -66,7 +66,7 @@ axis([Years(1)-dt, max(Years)+dt, 0, 1.1*max(max(X))])
 grid on
 hold off
 legend('Data Prey', 'Predicted Prey')
-subplot 212
+subplot 223
 plot(Years(2:end), X2(2,:), 'Color', [ 0.8500    0.3250    0.098], 'LineWidth', 2)
 hold on
 plot(Years(2:end), X2_pred(2,:), '--', 'Color', [ 0.8500    0.3250    0.098], 'LineWidth', 2)
@@ -86,8 +86,8 @@ hold off
 Atilde = Ur'*X2*Vr/Sigmar;
 X2_pred_red = Atilde*X1;
 
-figure
-subplot 211
+figure(70)
+subplot 222
 plot(Years(2:end), X2(1,:), 'Color', [0    0.4470    0.7410], 'LineWidth', 2)
 hold on
 plot(Years(2:end), X2_pred_red(1,:), '--', 'Color', [0    0.4470    0.7410], 'LineWidth', 2)
@@ -98,7 +98,7 @@ axis([Years(1)-dt, max(Years)+dt, 0, 1.1*max(max(X))])
 grid on
 hold off
 legend('Data Prey', 'Predicted Prey')
-subplot 212
+subplot 224
 plot(Years(2:end), X2(2,:), 'Color', [ 0.8500    0.3250    0.098], 'LineWidth', 2)
 hold on
 plot(Years(2:end), X2_pred_red(2,:), '--', 'Color', [ 0.8500    0.3250    0.098], 'LineWidth', 2)
@@ -470,31 +470,54 @@ else
     plot(lambda, error, 'o')
 end
 
+figure(33)
+subplot 311
+bar(Years, X(1,:), 'FaceColor', [0    0.4470    0.7410]), grid on
+title('Lotka-Volterra')
+xlabel('Time [y]')
+ylabel('Population [#]')
+legend('Real Data')
+axis([Years(1)-dt, max(Years)+dt, 0, 1.1*max(max(X))])
+figure(44)
+subplot 311
+bar(Years, X(2,:), 'FaceColor', [ 0.8500    0.3250    0.098]), grid on
+title('Lotka-Volterra')
+xlabel('Time [y]')
+ylabel('Population [#]')
+legend('Real Data')
+axis([Years(1)-dt, max(Years)+dt, 0, 1.1*max(max(X))])
+
 % pinv coefficients ode45 solutions plotting
-figure
-subplot 211
+figure(33)
+subplot 312
 bar(Years, sol_pinv(1,:), 'FaceColor', [0    0.4470    0.7410]), grid on
-title('Snowshoe Hare - Pseudo Inverse')
 xlabel('Time [y]')
 ylabel('Population [#]')
-subplot 212
+legend('Pseudo Inverse')
+axis([Years(1)-dt, max(Years)+dt, 0, 1.1*max(max(X))])
+figure(44)
+subplot 312
 bar(Years, sol_pinv(2,:), 'FaceColor', [ 0.8500    0.3250    0.098]), grid on
-title('Canadian Lynx - Pseudo Inverse')
 xlabel('Time [y]')
 ylabel('Population [#]')
+legend('Pseudo Inverse')
+axis([Years(1)-dt, max(Years)+dt, 0, 1.1*max(max(X))])
 
 % lasso coefficients ode45 solutions plotting
-figure
-subplot 211
+figure(33)
+subplot 313
 bar(Years, sol_lasso(1,:,idx1), 'FaceColor', [0    0.4470    0.7410]), grid on
-title('Snowshoe Hare - Lasso')
 xlabel('Time [y]')
 ylabel('Population [#]')
-subplot 212
+legend('Lasso')
+axis([Years(1)-dt, max(Years)+dt, 0, 1.1*max(max(X))])
+figure(44)
+subplot 313
 bar(Years, sol_lasso(2,:,idx2), 'FaceColor', [ 0.8500    0.3250    0.098]), grid on
-title('Canadian Lynx - Lasso')
 xlabel('Time [y]')
 ylabel('Population [#]')
+legend('Lasso')
+axis([Years(1)-dt, max(Years)+dt, 0, 1.1*max(max(X))])
 
 %% 4.SINDy
 % clearvars -except X Years Time dt t;
