@@ -305,7 +305,7 @@ ylabel('Normalized Value [-]')
 if augment == 1
     rH = 23;%size(SigmaH, 1);
 else
-    rH = 11;%size(SigmaH, 1);
+    rH = 17;%size(SigmaH, 1);
 end
 
 % figure
@@ -355,6 +355,7 @@ title('Time Series Data')
 legend('Data Prey')
 xlabel('Time [y]')
 ylabel('Population [#]')
+title('Time Delay Embedding')
 grid on
 axis([Years(1)-dt, max(Years)+dt, 0, 1.1*max(max(X))])
 subplot 212
@@ -373,6 +374,7 @@ bar(Years, X(2,:), 'FaceColor', [ 0.8500    0.3250    0.098])
 xlabel('Time [y]')
 ylabel('Population [#]')
 legend('Data Predator')
+title('Time Delay Embedding')
 axis([Years(1)-dt, max(Years)+dt, 0, 1.1*max(max(X))])
 grid on
 subplot 212
@@ -575,8 +577,8 @@ A_dt=A_handle(Xk(:,1), Xk(:,2));
 xi_dt = pinv(A_dt)*Xk1;
 xi1_dt_pinv = xi_dt(:,1);
 xi2_dt_pinv = xi_dt(:,2);
-xi1_dt_lasso = lasso(A_dt, Xk1(:,1), 'Lambda', 2);
-xi2_dt_lasso = lasso(A_dt, Xk1(:,2), 'Lambda', 2);
+xi1_dt_lasso = lasso(A_dt, Xk1(:,1), 'Lambda', .2);
+xi2_dt_lasso = lasso(A_dt, Xk1(:,2), 'Lambda', .2);
 
 figure
 subplot(2,1,1), bar(xi1_dt_pinv, 'FaceColor', [0    0.4470    0.7410]), grid on, title('Pseudo Inverse')
@@ -601,59 +603,67 @@ Xpred_pinv = [A_dt*xi1_dt_pinv, A_dt*xi2_dt_pinv];
 Xpred_lasso = [A_dt*xi1_dt_lasso, A_dt*xi2_dt_lasso];
 
 figure
-subplot 211
-bar(Xk1(:,1), 'FaceColor', [0    0.4470    0.7410])
+subplot 221
+bar(Years(2:end),Xk1(:,1), 'FaceColor', [0    0.4470    0.7410])
 grid on
 xlabel('Time [y]')
 ylabel('Population [#]')
 legend('Real Prey')
+axis([Years(1)-dt, max(Years)+dt, 0, 1.1*max(max(X))])
 title('Pseudo Inverse')
-subplot 212
-bar(Xpred_pinv(:,1), 'FaceColor', [0    0.4470    0.7410])
+subplot 222
+bar(Years(2:end),abs(Xpred_pinv(:,1)), 'FaceColor', [0    0.4470    0.7410])
 grid on
 xlabel('Time [y]')
 ylabel('Population [#]')
 legend('Predicted Prey')
-figure
-subplot 211
-bar(Xk1(:,2), 'FaceColor', [0.8500    0.3250    0.098])
+% figure
+subplot 223
+bar(Years(2:end),Xk1(:,2), 'FaceColor', [0.8500    0.3250    0.098])
 grid on
 xlabel('Time [y]')
 ylabel('Population [#]')
 legend('Real Predator')
+axis([Years(1)-dt, max(Years)+dt, 0, 1.1*max(max(X))])
 title('Pseudo Inverse')
-subplot 212
-bar(Xpred_pinv(:,2),  'FaceColor', [0.8500    0.3250    0.098])
+subplot 224
+bar(Years(2:end),abs(Xpred_pinv(:,2)),  'FaceColor', [0.8500    0.3250    0.098])
 grid on
 xlabel('Time [y]')
 ylabel('Population [#]')
 legend('Predicted Predator')
+axis([Years(1)-dt, max(Years)+dt, 0, 1.1*max(max(X))])
 
 figure
 subplot 211
-bar(Xk1(:,1), 'FaceColor', [0    0.4470    0.7410])
+bar(Years(2:end), Xk1(:,1), 'FaceColor', [0    0.4470    0.7410])
 grid on
 xlabel('Time [y]')
 ylabel('Population [#]')
 legend('Real Prey')
+axis([Years(1)-dt, max(Years)+dt, 0, 1.1*max(max(X))])
 title('Lasso')
 subplot 212
-bar(Xpred_lasso(:,1), 'FaceColor', [0    0.4470    0.7410])
+bar(Years(2:end), abs(Xpred_lasso(:,1)), 'FaceColor', [0    0.4470    0.7410])
 grid on
 xlabel('Time [y]')
 ylabel('Population [#]')
 legend('Predicted Prey')
+axis([Years(1)-dt, max(Years)+dt, 0, 1.1*max(max(X))])
+
 figure
 subplot 211
-bar(Xk1(:,2), 'FaceColor', [0.8500    0.3250    0.098])
+bar(Years(2:end), Xk1(:,2), 'FaceColor', [0.8500    0.3250    0.098])
 grid on
 xlabel('Time [y]')
 ylabel('Population [#]')
 legend('Real Predator')
+axis([Years(1)-dt, max(Years)+dt, 0, 1.1*max(max(X))])
 title('Lasso')
 subplot 212
-bar(Xpred_lasso(:,2),  'FaceColor', [0.8500    0.3250    0.098])
+bar(Years(2:end), abs(Xpred_lasso(:,2)),  'FaceColor', [0.8500    0.3250    0.098])
 grid on
 xlabel('Time [y]')
 ylabel('Population [#]')
 legend('Predicted Predator')
+axis([Years(1)-dt, max(Years)+dt, 0, 1.1*max(max(X))])
