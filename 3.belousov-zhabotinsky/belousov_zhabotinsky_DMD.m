@@ -20,7 +20,7 @@ for j=1:1:1
     ylabel('y [pixel]')
     figure
     [x, y] = meshgrid(1:n, 1:m);
-    surf(x, y, A, 'FaceAlpha', 1.0, 'EdgeColor', 'none')
+    surf(x, y, A, 'FaceAlpha', 1.0, 'EdgeColor', [.25 .25 .25])
     title('Chemical Oscillator 3D Frame')
     xlabel('x [pixel]'), ylabel('y [pixel]'), zlabel('Intensity [-]')
 end
