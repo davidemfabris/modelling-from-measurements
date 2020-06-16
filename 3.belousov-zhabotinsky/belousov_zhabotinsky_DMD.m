@@ -14,15 +14,18 @@ kk = 1;
 %% Data Plotting
 for j=1:1:1
     A=BZ_tensor(:,:,j);
+    figure(1)
+    subplot 221
     pcolor(A), shading interp, pause(0.001)
-    title('Chemical Oscillator Frame')
+    title('Real Data')
     xlabel('x [pixel]')
     ylabel('y [pixel]')
-    figure
     [x, y] = meshgrid(1:n, 1:m);
-    surf(x, y, A, 'FaceAlpha', 1.0, 'EdgeColor', [.25 .25 .25])
-    title('Chemical Oscillator 3D Frame')
+    figure(2)
+    subplot 221
+    surf(x, y, A, 'FaceAlpha', 1.0, 'EdgeColor', 'none')
     xlabel('x [pixel]'), ylabel('y [pixel]'), zlabel('Intensity [-]')
+    title('Real Data')
 end
 
 %% Data
@@ -50,14 +53,15 @@ end
 
 % Plotting
 figure
-loglog(diag(Sigma)/sum(diag(Sigma)), 'o', 'Linewidth', 2)
+semilogy(diag(Sigma)/sum(diag(Sigma)), 'o', 'Linewidth', 2)
 grid on
 title('Normalized Singular Values')
 xlabel('Mode Number [#]')
 ylabel('Normalized Value [-]')
 
 % Reduced order
-r=20;
+R = [5, 35, 65];
+for r = R
 Ur=U(:,1:r);
 Sigmar=Sigma(1:r,1:r);
 Vr=V(:,1:r);
@@ -96,22 +100,39 @@ end
 x_rec = real(Phi*x_dmd);
 
 %%
-figure
-for j=1:5:o
+for j=1:1
     image = x_rec(:,j);
     A=reshape(image, m, n);
+    figure(1)
+    if r==R(1)
+        subplot(222)
+    elseif r==R(2)
+        subplot(223)
+    elseif r==R(3)
+        subplot(224)
+    end
     pcolor(A), shading interp, pause(0.001)
-    title('Chemical Oscillator Frame')
     xlabel('x [pixel]')
     ylabel('y [pixel]')
+    titolo = strcat('Reduced Order DMD (', num2str(r), ' modes)');
+    title(titolo)
 end
 
-figure
-for j=1:5:o
+for j=1:1
     image = x_rec(:,j);
     A=reshape(image, m, n);
+    figure(2)
+    if r==R(1)
+        subplot(222)
+    elseif r==R(2)
+        subplot(223)
+    elseif r==R(3)
+        subplot(224)
+    end
     [x, y] = meshgrid(1:n, 1:m);
-    surf(x, y, A, 'FaceAlpha', 1.0, 'EdgeColor', 'none'), pause(.001)
-    title('Chemical Oscillator 3D')
+    surf(x, y, A, 'FaceAlpha', 1.0, 'EdgeColor', 'none')
     xlabel('x [pixel]'), ylabel('y [pixel]'), zlabel('Intensity [-]')
+    titolo = strcat('Reduced Order DMD (', num2str(r), ' modes)');
+    title(titolo)
+end
 end
