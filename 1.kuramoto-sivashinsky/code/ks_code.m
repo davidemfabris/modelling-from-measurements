@@ -6,7 +6,7 @@ clear; close all; clc
 N = 2048;
 x = 2*pi*(1:N)'/N;
 u = -sin(x)+2*cos(2*x)+3*cos(3*x)-4*sin(4*x);
-u = 0.01*(-sin(x)+2*cos(2*x)+3*cos(3*x)-4*sin(4*x));
+% u = 0.01*(-sin(x)+2*cos(2*x)+3*cos(3*x)-4*sin(4*x));
 u=randn(N,1);
 
 v = fft(u);
@@ -56,7 +56,7 @@ end
 
 %%
 cutoff = tt >= 0;
-cutoff = cutoff & tt<=10;
+cutoff = cutoff & tt<=1;
 % cutoff = tt > 0; cutoff = cutoff & tt<1;
 
 %contour(x/(2*pi),tt(cutoff),uu(:,cutoff).',[-10 -5 0 5 10]),shading interp, colormap(gray)
@@ -75,7 +75,6 @@ data.time = tsave;
 data.space = xsave;
 data.input = usave(1:end-1,:);
 data.output = usave(2:end,:);
-save('data', 'data')
 
 % %%
 uu2=uu(:,cutoff); [mm,nn]=size(uu2);
@@ -90,5 +89,9 @@ xlabel('uut'), ylabel('t'), zlabel('u')
 figure(5)
 waterfall(ks,tt(cutoff),(uut(:,cutoff).')), colormap(hot)
 title('Flame Front Evolution')
-xlabel('uut'), ylabel('t'), zlabel('u')
+xlabel('ks'), ylabel('t'), zlabel('uut')
 set(gca,'Xlim',[-50 50])
+% uutsave = uut(:,cutoff).';
+% data.input = uutsave(1:end-1,:);
+% data.output = uutsave(2:end,:);
+save('data', 'data')
