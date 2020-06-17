@@ -5,7 +5,7 @@ clearvars -except net; close all; clc
 sigma = 10; rho=28; beta=8/3;
 
 % Initial Condition
-x0=[-0.001; 0; 0];
+x0=[-10; 10; 0];
 
 % Domain Definition
 dt = 0.01;
@@ -18,13 +18,13 @@ options = odeset('RelTol',1e-10,'AbsTol',1e-11);
 % Plotting
 
 % figure
-plot3(x(:,2),x(:,1),x(:,3));
+plot3(x(:,1),x(:,2),x(:,3));
 hold on
 % plot3(x(1,1),x(1,2),x(1,3),'o');
 % plot3(x(end,1),x(end,2),x(end,3),'ro');
 hold off
 title('Lorenz Attractor')
-xlabel('y'), ylabel('x'), zlabel('z')
+xlabel('x'), ylabel('y'), zlabel('z')
 grid on
 
 % Data Population

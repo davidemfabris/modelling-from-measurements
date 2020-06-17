@@ -9,7 +9,7 @@ clear all; close all; clc
 %  ome(A) = -beta*A^2
 
 
-t=0:0.05:10;
+t=0:0.05:1;
 d1=0.1; d2=0.1; beta=1.0;
 L=20; n=512; N=n*n;
 x2=linspace(-L/2,L/2,n+1); x=x2(1:n); y=x;

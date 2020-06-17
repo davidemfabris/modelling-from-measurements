@@ -56,7 +56,7 @@ end
 
 %%
 cutoff = tt >= 0;
-cutoff = cutoff & tt<=0.6;
+cutoff = cutoff & tt<=10;
 % cutoff = tt > 0; cutoff = cutoff & tt<1;
 
 %contour(x/(2*pi),tt(cutoff),uu(:,cutoff).',[-10 -5 0 5 10]),shading interp, colormap(gray)
@@ -71,11 +71,11 @@ dt = h;
 dx = 1/N;
 usave = uu(:,cutoff).';
 
-% data.time = tsave;
-% data.space = xsave;
-% data.input = usave(1:end-1,:);
-% data.output = usave(1:end-1,:);
-% save('data', 'data')
+data.time = tsave;
+data.space = xsave;
+data.input = usave(1:end-1,:);
+data.output = usave(2:end,:);
+save('data', 'data')
 
 % %%
 uu2=uu(:,cutoff); [mm,nn]=size(uu2);
