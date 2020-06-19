@@ -11,9 +11,9 @@ tspan=dt:dt:10;
 % Dataset Population
 options = odeset('RelTol',1e-10,'AbsTol',1e-11);
 input=[]; output=[];
-data = 20;
-alpha = 5;
-tau = 10;
+data = 50;
+alpha = 2;
+tau = 50;
 
 if size(input,1)==0 || size(output,1)==0
     for jj=1:data
@@ -31,9 +31,9 @@ end
 %% Neural Network Definition
 layers = [16 16 16];
 net = feedforwardnet(layers);
-net.layers{1}.transferFcn = 'logsig';
-net.layers{2}.transferFcn = 'radbas';
-net.layers{3}.transferFcn = 'purelin';
+net.layers{1}.transferFcn = 'poslin';
+net.layers{2}.transferFcn = 'poslin';
+net.layers{3}.transferFcn = 'poslin';
 
 %% Training
 size(input.');
@@ -64,21 +64,26 @@ subplot 311
 plot(dt:dt:l*dt, yode(1+alpha+tau:end, 1), 'LineWidth', 2)
 xlabel('time'), ylabel('x')
 legend('x')
+grid on
 subplot 312
 plot(dt:dt:l*dt, yode(1+alpha+tau:end, 2), 'LineWidth', 2)
 xlabel('time'), ylabel('y')
 legend('y')
+grid on
 subplot 313
 plot(dt:dt:l*dt, yode(1+alpha+tau:end, 3), 'LineWidth', 2)
 xlabel('time'), ylabel('z')
 legend('z')
+grid on
 
 figure
 subplot 211
 plot(dt:dt:l*dt, lobe(1+alpha+tau:end), 'LineWidth', 2)
 xlabel('time'), ylabel('lobe')
 legend('real')
+grid on
 subplot 212
 plot(dt:dt:l*dt, ynn, 'LineWidth', 2)
 xlabel('time'), ylabel('lobe')
 legend('forecast')
+grid on

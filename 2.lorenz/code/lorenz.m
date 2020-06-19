@@ -9,7 +9,7 @@ x0=[-10; 10; 0];
 
 % Domain Definition
 dt = 0.01;
-tspan=dt:dt:50;
+tspan=dt:dt:8;
 
 % Solution
 options = odeset('RelTol',1e-10,'AbsTol',1e-11);
@@ -28,9 +28,10 @@ xlabel('x'), ylabel('y'), zlabel('z')
 grid on
 
 % Data Population
-r_train = [10, 28, 40];
+% r_train = [10, 28, 40];
+r_train = 28;
 input=[]; output=[];
-data = 100;
+data = 300;
 for jj=1:data
     x0=30*(rand(3,1)-0.5);
     ii = ceil(length(r_train)*rand(1));
@@ -46,11 +47,12 @@ net = feedforwardnet(layers);
 net.layers{1}.transferFcn = 'logsig';
 net.layers{2}.transferFcn = 'radbas';
 net.layers{3}.transferFcn = 'purelin';
-net.trainParam.epochs = 1000;
 
 %% Training
 size(input.')
-net.trainFcn = 'trainscg';
+net.trainFcn = 'trainlm';
+net.trainParam.epochs = 2000;
+net.trainParam.max_fail = 50;
 net = train(net,input.',output.','useGPU','yes','showResources','yes');
 
 % Naming
@@ -103,7 +105,6 @@ end
 
 
 %% Test
-x0=30*(rand(3,1)-0.5);
 r_test = [17, 35];
 for rho_test =r_test
     options = odeset('RelTol',1e-10,'AbsTol',1e-11);
